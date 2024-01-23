@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "openai-inference"
+version = "0.1.0"
+description = ""
+authors = ["Olga Tatarinova <olga@epoch8.co>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.12"
+datapipe-core = {version="^0.13.10", extras=["sqlite"]}
+openai = "^1.9.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
