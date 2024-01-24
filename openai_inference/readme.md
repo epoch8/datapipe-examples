@@ -41,12 +41,11 @@ Using Datapipe open-source library, this example demonstrates:
 
 ## Usage
 To run the example:
-1. Navigate to this directory
-2. Create all nesessary SQLite databases by running
+1. Create all nesessary SQLite databases by running
 ```
 datapipe db create-all
 ```
-3. Run the data processing
+2. Run the data processing
 ```
 datapipe run
 ```
