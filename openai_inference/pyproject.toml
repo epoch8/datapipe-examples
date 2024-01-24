@@ -7,7 +7,11 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
-datapipe-core = {version="^0.13.10", extras=["sqlite"]}
+datapipe-core = [
+    {version="^0.13.10", extras=["sqlite"], platform="linux"},
+    {version="^0.13.10", platform="darwin"},
+    {version="^0.13.10", platform="windows"},
+]
 openai = "^1.9.0"
 
 
