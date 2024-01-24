@@ -84,7 +84,7 @@ def process_prompt(
 
 # Setting up a catalog to manage tables for prompts, inputs, and outputs
 # This structure facilitates the tracking of what needs to be processed
-ccatalog = Catalog(
+catalog = Catalog(
     {
         "prompt": Table(
             store=TableStoreDB(
