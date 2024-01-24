@@ -12,10 +12,20 @@ from datapipe.store.pandas import TableStoreJsonLine
 
 GPT_KEY = "WRITE YOUR OPENAI KEY HERE"
 
-dbconn = DBConn("sqlite+pysqlite3:///db.sqlite")
+try:
+    # On linux, use pysqlite3
+    import pysqlite3
+    sqla_engine = "sqlite+pysqlite3"
+except ImportError:
+    # On mac and windows, try to fallback to sqlite
+    sqla_engine = "sqlite"
+
+
+dbconn = DBConn(f"{sqla_engine}:///db.sqlite")
+
 ds = DataStore(dbconn)
 
-dbconn_data = DBConn("sqlite+pysqlite3:///data.sqlite")
+dbconn_data = DBConn(f"{sqla_engine}:///data.sqlite")
 
 def process_prompt(
     prompt_df: pd.DataFrame, input_df: pd.DataFrame, 
