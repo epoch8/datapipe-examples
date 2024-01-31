@@ -30,14 +30,15 @@ Using Datapipe open-source library, this example demonstrates:
 ## Prerequisites
 
 - Python 3.x
-- Poetry for dependency management
+- Poetry for dependency management (https://python-poetry.org/)
 
 ## Setup
 
 1. Clone this repository.
-2. Navigate to this directory.
-3. Install dependencies using Poetry (poetry install)
-4. Set your OpenAI API key in the script.
+2. Navigate to this directory (`cd openai_inference/`)
+3. Activate virtual environment using Poetry (`poetry shell`)
+4. Install dependencies using Poetry (`poetry install`)
+5. Set your OpenAI API key in the script.
 
 ## Usage
 To run the example:
