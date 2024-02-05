@@ -4,32 +4,15 @@ import pandas as pd
 
 from catalog__sqls import SQL__LIST_OF_TABLES
 from catalog__sqls import SQL__SELECT_ALL_DATA_FROM_TABLE
-from catalog__sqls import SQL__DROP_TABLE
 from catalog__sqls import SQL__INSERT_INTO__INPUT
-from catalog__sqls import SQL__INSERT_INTO__PATTERN
 
 
 PATH__DATA = r'data.sqlite'
 PATH__METADATA = r'db.sqlite'
 
 
-def drop_table(connection, table):
-    connection.execute(
-        SQL__DROP_TABLE.format(table=table)
-    )
-
-
-def create_table(connection, query):
-    connection.execute(query)
-
-
 def insert__input(connection, values):
     connection.execute(SQL__INSERT_INTO__INPUT, values)
-    connection.commit()
-
-
-def insert__pattern(connection, values):
-    connection.execute(SQL__INSERT_INTO__PATTERN, values)
     connection.commit()
 
 
@@ -50,9 +33,6 @@ def show_db(connection):
 
 
 if __name__ == '__main__':
-    connection__data = sqlite3.connect(PATH__DATA)
-    connection__metadata = sqlite3.connect(PATH__METADATA)
-
     input('''
 ====================================================================================================
 >
@@ -86,6 +66,7 @@ if __name__ == '__main__':
     connection__metadata = sqlite3.connect(PATH__METADATA)
 
     show_db(connection__data)
+
     input('''
 ====================================================================================================
 >
@@ -143,9 +124,9 @@ if __name__ == '__main__':
     input('''
 ====================================================================================================
 >
->        Table 'output' now has new record with processed data.
+>           Table 'output' now has new record with processed data.
 >
->        Press Enter to show tables of Datapipe data.
+>           Press Enter to show tables of Datapipe data.
 >
 ====================================================================================================
 ''')
