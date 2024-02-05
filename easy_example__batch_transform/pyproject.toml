@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "easy-example-batch-transform"
+version = "0.1.0"
+description = ""
+authors = ["sergeyz06 <sergeyz06@yandex.ru>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "3.11"
+datapipe-core = [
+    {version="^0.13.10", extras=["sqlite"], platform="linux"},
+    {version="^0.13.10", platform="darwin"},
+    {version="^0.13.10", platform="win32"},
+]
+pyarrow = "^15.0.0"
+sqlalchemy = "2.0.25"
+sqlalchemy-pysqlite3-binary = "^0.0.4"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
