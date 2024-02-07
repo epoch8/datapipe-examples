@@ -3,7 +3,12 @@
 This repository contains a collection of examples demonstrating the usage of Datapipe (https://github.com/epoch8/datapipe), a real-time, incremental ETL library for Python. Our examples aim to provide practical, easy-to-understand demonstrations of how datapipe can be integrated into various data processing workflows.
 
 ## About Datapipe
-datapipe is designed to streamline the creation of data processing pipelines. It excels in scenarios where data is continuously changing, requiring pipelines to adapt and process only the modified data efficiently. This library tracks dependencies for each record in the pipeline, ensuring minimal and efficient data processing.
+
+[Datapipe](https://datapipe.dev/) is a real-time, incremental ETL library for Python with record-level dependency tracking.
+
+Datapipe is designed to streamline the creation of data processing pipelines. It excels in scenarios where data is continuously changing, requiring pipelines to adapt and process only the modified data efficiently. This library tracks dependencies for each record in the pipeline, ensuring minimal and efficient data processing.
+
+https://datapipe.dev/
 
 ## Key Features:
 
