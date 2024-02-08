@@ -7,11 +7,12 @@ authors = ["Olga Tatarinova <olga@epoch8.co>"]
 [tool.poetry.dependencies]
 python = ">=3.10,<3.12"
 datapipe-core = [
-    {version="^0.13.10", extras=["sqlite"], platform="linux"},
-    {version="^0.13.10", platform="darwin"},
-    {version="^0.13.10", platform="win32"},
+    {version="^0.13.10", extras=["excel", "sqlite"], platform="linux"},
+    {version="^0.13.10", extras=["excel"], platform="darwin"},
+    {version="^0.13.10", extras=["excel"], platform="win32"},
 ]
 openai = "^1.9.0"
+datapipe-app = "^0.4.1"
 
 
 [build-system]
