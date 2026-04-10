@@ -60,6 +60,12 @@ def agg__price_by_manufacture_country(
     )
 
     df__output__price_by_manufacture_country = df__input__cars_parsed[["manufacture_country"]]
-    df__output__price_by_manufacture_country = df__output__price_by_manufacture_country.drop_duplicates(ignore_index=True, keep="first")
+    df__output__price_by_manufacture_country = df__output__price_by_manufacture_country.drop_duplicates(
+        ignore_index=True,
+        keep="first",
+    )
+    df__output__price_by_manufacture_country["filepath"] = filepath__price_by_manufacture_country.format(
+        file_name=df__data__price_by_manufacture_country.index[0]
+    )
 
     return df__output__price_by_manufacture_country

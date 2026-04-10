@@ -1,3 +1,4 @@
+import os
 import re
 import time
 from pathlib import Path
@@ -103,7 +104,7 @@ def scan_file_list(
 
     for f in files:
         item = {
-            "filepath": f"{protocol_str}{f.path}",
+            "filepath": f"{protocol_str}{os.path.relpath(f.path)}",
             "size_bytes": files.fs.size(f.path),
         }
 

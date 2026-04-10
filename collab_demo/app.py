@@ -13,8 +13,8 @@ from lib.file_list import ScanFileList
 from transformations import parse_cars, agg__price_by_manufacture_country
 
 
-FILEPATH__RAW__CARS = "./data/raw/cars/{file_name}.json"
-FILEPATH__PRICE_BY_MANUFACTURE_COUNTRY = "./data/processed/price_by_manufacture_country/{file_name}.json"
+FILEPATH__RAW__CARS = "data/raw/cars/{file_name}.json"
+FILEPATH__PRICE_BY_MANUFACTURE_COUNTRY = "data/processed/price_by_manufacture_country/{file_name}.json"
 
 
 try:
@@ -49,6 +49,7 @@ catalog = Catalog(
                 name="price_by_manufacture_country",
                 data_sql_schema=[
                     Column("manufacture_country", String, primary_key=True),
+                    Column("filepath", String),
                 ],
             )
         ),
