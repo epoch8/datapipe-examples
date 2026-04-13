@@ -1,0 +1,19 @@
+[project]
+name = "collab-demo-sql"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "sergeyz06",email = "sergeyz06@yandex.ru"}
+]
+readme = "README.md"
+requires-python = "3.13.*"
+dependencies = [
+    "datapipe-core (>=0.14.8,<0.15.0)",
+    "pysqlite3-binary (>=0.5.4.post2,<0.6.0)",
+    "sqlalchemy-pysqlite3-binary (>=0.0.4,<0.0.5)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
