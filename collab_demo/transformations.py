@@ -69,3 +69,32 @@ def agg__price_by_manufacture_country(
     )
 
     return df__output__price_by_manufacture_country
+
+
+def agg__price_by_color(
+        df__input__cars_parsed: pd.DataFrame,
+        filepath__price_by_color: str
+) -> pd.DataFrame:
+    df__data__price_by_manufacture_country = pd.concat(
+        [
+            pd.read_json(row["filepath"], typ="series").to_frame().T[["color", "price"]]
+            for _, row in df__input__cars_parsed.iterrows()
+        ]
+    )
+
+    df__data__price_by_manufacture_country = df__data__price_by_manufacture_country.groupby("color").sum()
+    df__data__price_by_manufacture_country.to_json(
+        filepath__price_by_color.format(file_name=df__data__price_by_manufacture_country.index[0]),
+        orient="records",
+    )
+
+    df__output__price_by_manufacture_country = df__input__cars_parsed[["color"]]
+    df__output__price_by_manufacture_country = df__output__price_by_manufacture_country.drop_duplicates(
+        ignore_index=True,
+        keep="first",
+    )
+    df__output__price_by_manufacture_country["filepath"] = filepath__price_by_color.format(
+        file_name=df__data__price_by_manufacture_country.index[0]
+    )
+
+    return df__output__price_by_manufacture_country

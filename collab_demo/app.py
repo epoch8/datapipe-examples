@@ -10,11 +10,14 @@ from datapipe.step.batch_transform import BatchTransform
 from datapipe.store.database import DBConn, TableStoreDB
 
 from lib.file_list import ScanFileList
-from transformations import parse_cars, agg__price_by_manufacture_country
+from transformations import parse_cars
+from transformations import agg__price_by_manufacture_country
+from transformations import agg__price_by_color
 
 
 FILEPATH__RAW__CARS = "data/raw/cars/{file_name}.json"
 FILEPATH__PRICE_BY_MANUFACTURE_COUNTRY = "data/processed/price_by_manufacture_country/{file_name}.json"
+FILEPATH__PRICE_BY_COLOR = "data/processed/price_by_color/{file_name}.json"
 
 
 try:
@@ -49,6 +52,16 @@ catalog = Catalog(
                 name="price_by_manufacture_country",
                 data_sql_schema=[
                     Column("manufacture_country", String, primary_key=True),
+                    Column("filepath", String),
+                ],
+            )
+        ),
+        "price_by_color": Table(
+            store=TableStoreDB(
+                dbconn=dbconn,
+                name="price_by_color",
+                data_sql_schema=[
+                    Column("color", String, primary_key=True),
                     Column("filepath", String),
                 ],
             )
@@ -95,6 +108,24 @@ pipeline = Pipeline(
             executor_config=ExecutorConfig(parallelism=1),
             transform_keys=[
                 "manufacture_country",
+            ],
+            labels=[
+                ("entity", "cars"),
+                ("layer", "agg"),
+                ("environment", "prod"),
+            ],
+        ),
+        BatchTransform(
+            agg__price_by_color,
+            inputs=["cars_parsed"],
+            outputs=["price_by_color"],
+            kwargs={
+                "filepath__price_by_color": FILEPATH__PRICE_BY_COLOR,
+            },
+            chunk_size=1,
+            executor_config=ExecutorConfig(parallelism=1),
+            transform_keys=[
+                "color",
             ],
             labels=[
                 ("entity", "cars"),
