@@ -75,26 +75,69 @@ def agg__price_by_color(
         df__input__cars_parsed: pd.DataFrame,
         filepath__price_by_color: str
 ) -> pd.DataFrame:
-    df__data__price_by_manufacture_country = pd.concat(
+    df__data__price_by_color = pd.concat(
         [
             pd.read_json(row["filepath"], typ="series").to_frame().T[["color", "price"]]
             for _, row in df__input__cars_parsed.iterrows()
         ]
     )
 
-    df__data__price_by_manufacture_country = df__data__price_by_manufacture_country.groupby("color").sum()
-    df__data__price_by_manufacture_country.to_json(
-        filepath__price_by_color.format(file_name=df__data__price_by_manufacture_country.index[0]),
+    df__data__price_by_color = df__data__price_by_color.groupby("color").sum()
+    df__data__price_by_color.to_json(
+        filepath__price_by_color.format(file_name=df__data__price_by_color.index[0]),
         orient="records",
     )
 
-    df__output__price_by_manufacture_country = df__input__cars_parsed[["color"]]
-    df__output__price_by_manufacture_country = df__output__price_by_manufacture_country.drop_duplicates(
+    df__output__price_by_color = df__input__cars_parsed[["color"]]
+    df__output__price_by_color = df__output__price_by_color.drop_duplicates(
         ignore_index=True,
         keep="first",
     )
-    df__output__price_by_manufacture_country["filepath"] = filepath__price_by_color.format(
-        file_name=df__data__price_by_manufacture_country.index[0]
+    df__output__price_by_color["filepath"] = filepath__price_by_color.format(
+        file_name=df__data__price_by_color.index[0]
     )
 
-    return df__output__price_by_manufacture_country
+    return df__output__price_by_color
+
+
+def agg__price_by_manufacture_country_and_color(
+        df__input__cars_parsed: pd.DataFrame,
+        filepath__price_by_manufacture_country_and_color: str
+) -> pd.DataFrame:
+    df__data__price_by_manufacture_country_and_color = pd.concat(
+        [
+            pd.read_json(row["filepath"], typ="series").to_frame().T[["manufacture_country", "color", "price"]]
+            for _, row in df__input__cars_parsed.iterrows()
+        ]
+    )
+
+    df__data__price_by_manufacture_country_and_color = df__data__price_by_manufacture_country_and_color.groupby(
+        [
+            "manufacture_country",
+            "color",
+        ]
+    ).sum()
+
+    file_name = (
+        f"{df__data__price_by_manufacture_country_and_color.index[0][0]}"
+        + "_"
+        + f"{df__data__price_by_manufacture_country_and_color.index[0][1]}"
+    )
+
+    df__data__price_by_manufacture_country_and_color.to_json(
+        filepath__price_by_manufacture_country_and_color.format(
+            file_name=file_name
+        ),
+        orient="records",
+    )
+
+    df__output__price_by_manufacture_country_and_color = df__input__cars_parsed[["manufacture_country", "color"]]
+    df__output__price_by_manufacture_country_and_color = df__output__price_by_manufacture_country_and_color.drop_duplicates(
+        ignore_index=True,
+        keep="first",
+    )
+    df__output__price_by_manufacture_country_and_color["filepath"] = filepath__price_by_manufacture_country_and_color.format(
+        file_name=file_name
+    )
+
+    return df__output__price_by_manufacture_country_and_color
