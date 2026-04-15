@@ -26,7 +26,6 @@ FILES_SCHEMA = [
     Column("filepath", String()),
     Column("size_bytes", Integer()),
 ]
-FILEPATH__PROCESSED__CARS = "data/processed/cars/{data}.jsonl"
 
 
 class ScanFileList(PipelineStep):
@@ -47,7 +46,7 @@ class ScanFileList(PipelineStep):
             name=self.output,
             dt=Table(
                 store=TableStoreJsonLine(
-                    filename=FILEPATH__PROCESSED__CARS.format(data=self.output),
+                    filename=self.filename_pattern.format(data=self.output),
                     primary_schema=[
                         Column(attrname, String(), primary_key=True)
                         for attrname in attrnames
