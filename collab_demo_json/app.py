@@ -84,7 +84,8 @@ catalog = Catalog(
 pipeline = Pipeline(
     [
         ScanFileList(
-            FILEPATH__RAW__CARS,
+            filename_pattern=FILEPATH__RAW__CARS,
+            filename_output=FILEPATH__PROCESSED__CARS,
             output="cars_scanned",
             labels=[
                 ("entity", "cars"),

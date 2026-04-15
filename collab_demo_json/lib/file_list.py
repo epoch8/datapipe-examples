@@ -32,11 +32,13 @@ class ScanFileList(PipelineStep):
     def __init__(
         self,
         filename_pattern: str,
+        filename_output: str,
         output: str,
         labels: Optional[Labels] = None,
     ):
         self.output = output
         self.filename_pattern = filename_pattern
+        self.filename_output = filename_output
         self.labels = labels
 
     def build_compute(self, ds: DataStore, catalog: Catalog) -> List[ComputeStep]:
@@ -46,7 +48,7 @@ class ScanFileList(PipelineStep):
             name=self.output,
             dt=Table(
                 store=TableStoreJsonLine(
-                    filename=self.filename_pattern.format(data=self.output),
+                    filename=self.filename_output.format(data=self.output),
                     primary_schema=[
                         Column(attrname, String(), primary_key=True)
                         for attrname in attrnames
