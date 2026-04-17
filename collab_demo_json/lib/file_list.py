@@ -10,8 +10,6 @@ from datapipe.compute import Catalog, ComputeStep, PipelineStep, Table
 from datapipe.step.datatable_transform import DatatableTransformStep
 from datapipe.datatable import DataStore, DataTable
 from datapipe.run_config import RunConfig
-from datapipe.store.database import TableStoreDB
-from datapipe.store.filedir import TableStoreFiledir, JSONFile
 from datapipe.store.pandas import TableStoreJsonLine
 from datapipe.store.filedir import (
     _pattern_to_attrnames,

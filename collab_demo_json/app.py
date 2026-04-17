@@ -1,4 +1,4 @@
-from sqlalchemy import Column, String, Integer, Boolean
+from sqlalchemy import Column, String, Integer
 
 from datapipe.compute import Catalog
 from datapipe.compute import DatapipeApp
@@ -7,7 +7,7 @@ from datapipe.compute import Table
 from datapipe.executor import ExecutorConfig
 from datapipe.datatable import DataStore
 from datapipe.step.batch_transform import BatchTransform
-from datapipe.store.database import DBConn, TableStoreDB
+from datapipe.store.database import DBConn
 from datapipe.store.pandas import TableStoreJsonLine
 
 from lib.file_list import ScanFileList
@@ -42,10 +42,6 @@ catalog = Catalog(
                     Column("model_id", Integer, primary_key=True),
                     Column("manufacture_country", String, primary_key=True),
                     Column("color", String, primary_key=True),
-                    Column("price", Integer),
-                    Column("year", Integer),
-                    # Column("new", Boolean),
-                    Column("new", Integer),
                 ],
             )
         ),
@@ -54,7 +50,6 @@ catalog = Catalog(
                 filename=FILEPATH__PROCESSED__CARS.format(data="price_by_manufacture_country"),
                 primary_schema=[
                     Column("manufacture_country", String, primary_key=True),
-                    Column("price", Integer),
                 ],
             )
         ),
@@ -63,7 +58,6 @@ catalog = Catalog(
                 filename=FILEPATH__PROCESSED__CARS.format(data="price_by_color"),
                 primary_schema=[
                     Column("color", String, primary_key=True),
-                    Column("price", Integer),
                 ],
             )
         ),
@@ -73,7 +67,6 @@ catalog = Catalog(
                 primary_schema=[
                     Column("manufacture_country", String, primary_key=True),
                     Column("color", String, primary_key=True),
-                    Column("price", Integer),
                 ],
             )
         ),
